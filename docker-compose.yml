@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  backend:
+    build: .
+    ports:
+      - 8000:3000 #map port 3000 from wihthin the docker container to external port 8000 outside of docker.
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: admin
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - .dbdata:/var/lib/mysql
