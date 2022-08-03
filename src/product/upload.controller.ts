@@ -1,5 +1,6 @@
-import { Controller, Post, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Param, Post, Res, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Response } from 'express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -21,7 +22,18 @@ export class UploadController {
             }
         )
     }))
+
     uploadFile(@UploadedFile() file: Express.Multer.File) {
-        console.log(file);
+        return {
+            url: `http://localhost:8000/api/${file.path}`
+        }
     }
+
+    @Get("uploads/:path")
+    async getImage(
+        @Param("path") path : string,
+        @Res() res: Response
+    ) {
+        res.sendFile(path, { root: 'uploads' });
+    }    
 }
