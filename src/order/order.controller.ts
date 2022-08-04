@@ -1,5 +1,4 @@
-import { ClassSerializerInterceptor, Controller, Get, Param, Post, Query, Res, UseGuards, UseInterceptors } from '@nestjs/common';
-import { isObject } from 'class-validator';
+import { ClassSerializerInterceptor, Controller, Get, Post, Query, Res, UseGuards, UseInterceptors } from '@nestjs/common';
 import { Response } from 'express';
 import { Parser } from 'json2csv';
 import { AuthGuard } from 'src/auth/auth.guard';
