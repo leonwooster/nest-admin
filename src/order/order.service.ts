@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AbstractService } from 'src/common/abstract.service';
-import { PagginatedResult } from 'src/common/paginated-result.interface';
 import { Repository } from 'typeorm';
 import { Order } from './order.entity';
 
@@ -22,7 +21,8 @@ export class OrderService extends AbstractService {
                 name: order.name,
                 email: order.email,
                 total: order.total,
-                created_at: order.created_at,                             
+                created_at: order.created_at,    
+                order_items: order.order_items, 
             })),
             meta
         }
